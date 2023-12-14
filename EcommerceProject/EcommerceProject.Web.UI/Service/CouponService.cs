@@ -58,7 +58,7 @@ namespace EcommerceProject.Web.UI.Service
             });
         }
 
-        public async Task<ResponseDto?> UpodateCouponAsync(CouponDto couponDto)
+        public async Task<ResponseDto?> UpdateCouponAsync(CouponDto couponDto)
         {
             return await _baseService.SendAsync(new RequestDto()
             {

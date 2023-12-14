@@ -59,7 +59,7 @@ namespace EcommerceProject.Web.UI.Service
                         return new() { IsSuccess = false, Message = "Internal Server Error" };
                     default:
                         var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                        var apiResponseDto = JsonSerializer.Deserialize<ResponseDto>(apiContent);
+                        var apiResponseDto = JsonSerializer.Deserialize<ResponseDto>(apiContent, options: new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
                         return apiResponseDto;
                 }
             }
