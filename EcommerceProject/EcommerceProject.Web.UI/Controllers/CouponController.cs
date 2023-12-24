@@ -22,6 +22,10 @@ namespace EcommerceProject.Web.UI.Controllers
             {
                 list = JsonSerializer.Deserialize<List<CouponDto>>(Convert.ToString(response.Result), options:new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
             }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
             return View(list);
         }
 
@@ -38,8 +42,13 @@ namespace EcommerceProject.Web.UI.Controllers
                 ResponseDto? response = await _couponService.CreateCouponAsync(model);
                 if (response != null && response.IsSuccess == true)
                 {
+                    TempData["success"] = "Coupon Created Successfully";
                     //return RedirectToAction("Index");
                     return RedirectToAction(nameof(CouponIndex));
+                }
+                else
+                {
+                    TempData["error"] = response?.Message;
                 }
             }
             return View(model);
@@ -53,7 +62,11 @@ namespace EcommerceProject.Web.UI.Controllers
 				CouponDto? model = JsonSerializer.Deserialize<CouponDto>(Convert.ToString(response.Result), options: new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
                 return View(model);
 			}
-			return NotFound();
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
+            return NotFound();
         }
 
         [HttpPost]
@@ -62,7 +75,12 @@ namespace EcommerceProject.Web.UI.Controllers
             ResponseDto? response = await _couponService.DeleteCouponAsync(couponDto.CouponId);
             if (response != null && response.IsSuccess == true)
             {
+                TempData["success"] = "Coupon Deleted Successfully";
                 return RedirectToAction(nameof(CouponIndex));
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
             }
             return NotFound();
         }

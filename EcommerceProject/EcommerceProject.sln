@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{7B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceProject.Services.CouponAPI", "EcommerceProject.Services.CouponAPI\EcommerceProject.Services.CouponAPI.csproj", "{01D3C935-8420-44FE-9063-CF329B94D672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceProject.Web.UI", "EcommerceProject.Web.UI\EcommerceProject.Web.UI.csproj", "{47C7BF6E-861E-4D64-BB75-8D37CEBAF70C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceProject.Web.UI", "EcommerceProject.Web.UI\EcommerceProject.Web.UI.csproj", "{47C7BF6E-861E-4D64-BB75-8D37CEBAF70C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
