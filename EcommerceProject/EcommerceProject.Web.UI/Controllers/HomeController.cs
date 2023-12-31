@@ -1,4 +1,6 @@
 ﻿using EcommerceProject.Web.UI.Models;
+using EcommerceProject.Web.UI.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,6 +20,7 @@ namespace EcommerceProject.Web.UI.Controllers
             return View();
         }
 
+        [Authorize(Roles =SD.RoleAdmin)]
         public IActionResult Privacy()
         {
             return View();

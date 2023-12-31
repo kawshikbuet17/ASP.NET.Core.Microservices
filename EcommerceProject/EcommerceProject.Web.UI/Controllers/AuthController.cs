@@ -44,7 +44,8 @@ namespace EcommerceProject.Web.UI.Controllers
             }
             else
             {
-                ModelState.AddModelError("CustomError", responseDto.Message);
+                //ModelState.AddModelError("CustomError", responseDto.Message);
+                TempData["error"] = responseDto.Message;
                 return View(obj);
             }
         }
@@ -80,6 +81,10 @@ namespace EcommerceProject.Web.UI.Controllers
                     TempData["success"] = "Registration Successful";
                     return RedirectToAction(nameof(Login));
                 }
+            }
+            else
+            {
+                TempData["error"] = result.Message;
             }
             
             var roleList = new List<SelectListItem>()
@@ -119,6 +124,20 @@ namespace EcommerceProject.Web.UI.Controllers
                 new Claim(
                     JwtRegisteredClaimNames.Name, 
                     jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value
+                    )
+                );
+
+
+            identity.AddClaim(
+                new Claim(
+                    ClaimTypes.Name,
+                    jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value
+                    )
+                );
+            identity.AddClaim(
+                new Claim(
+                    ClaimTypes.Role,
+                    jwt.Claims.FirstOrDefault(u => u.Type == "role").Value
                     )
                 );
 
