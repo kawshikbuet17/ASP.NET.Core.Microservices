@@ -40,6 +40,7 @@ namespace EcommerceProject.Web.UI.Controllers
 
                 await SignInUser(loginResponseDto);
                 _tokenProvider.SetToken(loginResponseDto.Token);
+                TempData["success"] = "Login Successful";
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -100,6 +101,7 @@ namespace EcommerceProject.Web.UI.Controllers
         {
             await HttpContext.SignOutAsync();
             _tokenProvider.ClearToken();
+            TempData["success"] = "Logout Successful";
             return RedirectToAction("Index", "Home");
         }
 

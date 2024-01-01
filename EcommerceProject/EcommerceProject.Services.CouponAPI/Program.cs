@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Cryptography.Xml;
+using EcommerceProject.Services.CouponAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,28 +50,8 @@ builder.Services.AddSwaggerGen(option =>
     });
 }); //additional
 
-var secret = builder.Configuration.GetValue<string>("ApiSettings:Secret"); //additional
-var issuer = builder.Configuration.GetValue<string>("ApiSettings:Issuer"); //additional
-var audience = builder.Configuration.GetValue<string>("ApiSettings:Audience"); //additional
+builder.AddAppAuthentication(); //additional
 
-var key = Encoding.ASCII.GetBytes(secret); //additional
-
-builder.Services.AddAuthentication(x =>
-    {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(x =>
-    {
-        x.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = true,
-            ValidIssuer = issuer,
-            ValidAudience = audience,
-            ValidateAudience = true
-        };
-    }); //additional
 builder.Services.AddAuthorization(); //additional
 
 var app = builder.Build();
