@@ -33,12 +33,22 @@ namespace EcommerceProject.Web.UI.Service
 
         public async Task<ResponseDto?> RemoveFromCartAsync(int cartDetailsId)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = cartDetailsId,
+                Url = SD.ShoppingCartAPIBase + "/api/cart/RemoveCart"
+            });
         }
 
         public async Task<ResponseDto?> UpsertCartAsync(CartDto cartDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = SD.ApiType.POST,
+                Data = cartDto,
+                Url = SD.ShoppingCartAPIBase + "/api/cart/CartUpsert"
+            });
         }
     }
 }
