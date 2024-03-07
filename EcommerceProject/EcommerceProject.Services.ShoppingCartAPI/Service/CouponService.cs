@@ -19,7 +19,7 @@ namespace EcommerceProject.Services.ShoppingCartAPI.Service
             var apiContent = await response.Content.ReadAsStringAsync();
             var resp = JsonSerializer.Deserialize<ResponseDto>(apiContent, options: new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
 
-            if (resp.IsSuccess == true)
+            if (resp != null && resp.IsSuccess == true)
             {
                 return JsonSerializer.Deserialize<CouponDto>(Convert.ToString(resp.Result), options: new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
             }
